@@ -45,6 +45,18 @@ namespace ExpenseTracker.Controllers
             int Balance = TotalIncome - TotalExpense;
             ViewBag.Balance = String.Format(culture,"{0:C0}", Balance);
 
+            //Donut Chart
+            ViewBag.DonutChartData = SelectedTransactions
+                .Where(i => i.Category.Type == "Expense")
+                .GroupBy(j => j.Category.CategoryId)
+                .Select(k => new
+                {
+                    CategoryWithIcon = k.First().Category.Icon + " " + k.First().Category.Title,
+                    Amount = k.Sum(j => j.Amount),
+                    formattedAmount = k.Sum(j => j.Amount).ToString()
+
+                }).ToList();
+
             return View();
         }
     }

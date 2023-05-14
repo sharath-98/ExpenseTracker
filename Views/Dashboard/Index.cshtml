@@ -38,3 +38,26 @@
         </div>
     </div>
 </div>
+
+@*Donut chart and Spline chart*@
+<div class="row mb-4">
+    <div class="col-md-4">
+        <div class="widget chart">
+            <div class="p-4">
+                <h5 class="fw-bold">Expense by Category</h5>
+                <ejs-accumulationchart id="donutChart" background="#1a222b" enableSmartLabels="true">
+                    <e-accumulation-series-collection>
+                        <e-accumulation-series dataSource="@ViewBag.DonutChartData" xName="CategoryWithIcon" yName="Amount" innerRadius="60%">
+                            <e-accumulationseries-datalabel name="formattedAmount" visible="true"></e-accumulationseries-datalabel>
+                        </e-accumulation-series>
+                    </e-accumulation-series-collection>
+                    <e-accumulationchart-legendsettings toggleVisibility="false">
+                        <e-legendsettings-textstyle color="#fff" size="1rem"></e-legendsettings-textstyle>
+                    </e-accumulationchart-legendsettings>
+                    <e-accumulationchart-tooltipsettings enable></e-accumulationchart-tooltipsettings>
+                </ejs-accumulationchart>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8"></div>
+</div>
