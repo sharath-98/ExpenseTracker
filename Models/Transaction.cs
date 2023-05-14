@@ -11,7 +11,7 @@ namespace ExpenseTracker.Models
 
         // Foreign key specification
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        public Category? Category { get; set; }
 
 
         public int Amount { get; set; }
@@ -21,13 +21,5 @@ namespace ExpenseTracker.Models
 
         public DateTime? Date { get; set; } = DateTime.Now;
         
-        [NotMapped]
-        public string? TitleWithIcon
-        {
-            get
-            {
-                return this.Category.TitleWithIcon;
-            }
-        }
     }
 }
