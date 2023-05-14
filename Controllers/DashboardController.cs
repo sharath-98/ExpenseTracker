@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Syncfusion.EJ2.PivotView;
+using System.Globalization;
 
 namespace ExpenseTracker.Controllers
 {
@@ -24,21 +25,25 @@ namespace ExpenseTracker.Controllers
                 .Where(y => y.Date >= startDate && y.Date <= endDate)
                 .ToListAsync();
 
+
+            CultureInfo culture = CultureInfo.CreateSpecificCulture("en-US");
+            culture.NumberFormat.CurrencyNegativePattern = 1;
+
             //total income
             int TotalIncome = SelectedTransactions
                 .Where(i => i.Category.Type == "Income")
                 .Sum(x => x.Amount);
-            ViewBag.TotalIncome = TotalIncome.ToString();
+            ViewBag.TotalIncome = String.Format(culture, "{0:C0}", TotalIncome);
 
             // Total Expense
             int TotalExpense = SelectedTransactions
                 .Where(i => i.Category.Type == "Expense")
                 .Sum(x => x.Amount);
-            ViewBag.TotalExpense = TotalExpense.ToString();
+            ViewBag.TotalExpense = String.Format(culture, "{0:C0}", TotalExpense);
 
             // Balance
             int Balance = TotalIncome - TotalExpense;
-            ViewBag.Balance = Balance.ToString();
+            ViewBag.Balance = String.Format(culture,"{0:C0}", Balance);
 
             return View();
         }
